@@ -5,6 +5,7 @@ import { useFreshItem, CreateAsyncQueryValidator, useDispatch } from "@hrbolek/u
 import { FetchUserByIdAsyncAction } from "../Queries"
 import { FetchEventByIdAsyncAction } from "../Queries/FetchEventByIdAsyncAction"
 import { EventLargeCard } from "../Components/Event/EventLargeCard"
+import { EventEditCard } from "../Components/Event/EventEditCard"
 
 const validator = CreateAsyncQueryValidator({error: "Nepovedlo se načíst uživatele", success: "Načtení uživatele se povedlo"})
 export const EventEditPage = ()  => {
@@ -20,9 +21,7 @@ export const EventEditPage = ()  => {
             //     {JSON.stringify(event)}
             // </div>
             <EventLargeCard event={event}>
-                <EventLargeCard event={event}>
-                    Heureka
-                </EventLargeCard>
+                <EventEditCard event={event} />
             </EventLargeCard>
         )
     } else {
