@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
-import { CardCapsule } from '@hrbolek/uoisfrontend-shared/src'
+import { CardCapsule, EditableAttributeText } from '@hrbolek/uoisfrontend-shared/src'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { UpdateEventAsyncAction } from '../../Queries/UpdateEventAsyncAction'
 
 
 export const EventEditCard = ({event}) => {
@@ -11,6 +12,9 @@ export const EventEditCard = ({event}) => {
             <Row>
                 <Col>Název</Col>
                 <Col>{event?.name}</Col>
+            </Row>
+            <Row>
+                <EditableAttributeText item={event} attributename="name" label="Název" assyncUpdater={UpdateEventAsyncAction} />
             </Row>
             <Row>
                 <Col>Počátek</Col>
