@@ -14,7 +14,7 @@ export const EventEditCard = ({event}) => {
                 <Col>{event?.name}</Col>
             </Row>
             <Row>
-                <EditableAttributeText item={event} attributename="name" label="Název" assyncUpdater={UpdateEventAsyncAction} />
+                <EditableAttributeText item={event} attributeName="name" label="Název" asyncUpdater={UpdateEventAsyncAction} />
             </Row>
             <Row>
                 <Col>Počátek</Col>
