@@ -46,7 +46,7 @@ export const Routes = [
     },    
 ]
 
-const router = createBrowserRouter(Routes, {basename: "/ug"});
+const router = createBrowserRouter(Routes, {basename: "/publications"});
 // const router = createBrowserRouter(Routes);
 
 export const AppRouter = () => <RouterProvider router={router} />
