@@ -25,6 +25,11 @@ export const Routes = [
         errorElement: <SearchPage />,
     },
     {
+        path: "/publication/view/:id",
+        element: <EventPage />,
+        errorElement: <SearchPage />,
+    },
+    {
         path: "/user/:id",
         element: <UserPage />,
         errorElement: <SearchPage />,

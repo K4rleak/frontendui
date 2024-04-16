@@ -5,7 +5,7 @@ import { useFreshItem, CreateAsyncQueryValidator, useDispatch } from "@hrbolek/u
 import { FetchUserByIdAsyncAction } from "../Queries"
 import { FetchEventByIdAsyncAction } from "../Queries/FetchEventByIdAsyncAction"
 import { EventLargeCard } from "../Components/Event/EventLargeCard"
-import { EventEditCard } from "../Components/Event/EventEditCard"
+import { EventEditCard } from '../Components/Event/EventEditCard'
 
 const validator = CreateAsyncQueryValidator({error: "Nepovedlo se načíst uživatele", success: "Načtení uživatele se povedlo"})
 export const EventEditPage = ()  => {
