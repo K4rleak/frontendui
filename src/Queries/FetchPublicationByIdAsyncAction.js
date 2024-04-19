@@ -10,7 +10,6 @@ const query = `query ($id: UUID!) {
       name
     }
     authors {
-      name
       id
       order
       lastchange
