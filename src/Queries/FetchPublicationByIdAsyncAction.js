@@ -2,33 +2,28 @@ import { CreateAsyncActionFromQuery } from "@hrbolek/uoisfrontend-shared/src"
 
 const query = `query ($id: UUID!) {
     result:   publicationById(id: $id) {
-    __typename
-    id
-    name
-    publicationtype {
+      __typename
       id
-      name
-    }
-    authors {
-      id
-      order
       lastchange
-      share
-      user {
+      valid
+      name
+      publishedDate
+      place
+      reference
+      authors {
+        order
+        share
+        user {
+          id
+        }
+      }
+      publicationtype {
         id
         name
-        surname
-        email
       }
-      valid
-    }
-    place
-    publishedDate
-    valid
-    reference
-    subjects {
-      name
-      id
+      subjects {
+        id
+        name
       }
     }
   }`

@@ -41,6 +41,10 @@ export const PublicationMediumCard = ({publication}) => {
                 <Col>{publication?.reference}</Col>
             </Row>
             <Row>
+                <Col>Typ</Col>
+                <Col>{publication?.publicationtype.name}</Col>
+            </Row>
+            <Row>
                 <Col>Datum</Col>
                 <Col>{publication?.publishedDate}</Col>
             </Row> 

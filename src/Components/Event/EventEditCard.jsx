@@ -4,6 +4,9 @@ import Col from 'react-bootstrap/Col';
 import { UpdateEventAsyncAction } from '../../Queries/UpdateEventAsyncAction';
 //import { EventEditType } from './EventEditType';
 
+// export const EventEditCard = ({ event }) => {
+//     const changed 
+// }
 
 
 
