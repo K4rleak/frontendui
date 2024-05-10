@@ -8,11 +8,13 @@ import { EventPage } from "./Pages/EventPage";
 import { EventEditPage } from "./Pages/EventEditPage";
 import { PublicationPage } from "./Pages/PublicationPage";
 import { PublicationEditPage } from "./Pages/PublicationEditPage";
+import { base } from "./config";
 // import { UserPage, GroupPage } from "./Pages";
 
 export const Routes = [
+    
     {
-        path: "/",
+        path: base + "/",
         errorElement: <SearchPage />,
         element: <SearchPage />
     },
@@ -27,12 +29,12 @@ export const Routes = [
         errorElement: <SearchPage />,
     },
     {
-        path: "/publication/view/:id",
+        path: base + "/publication/view/:id",
         element: <PublicationPage />,
         errorElement: <SearchPage />,
     },
     {
-        path: "/publication/edit/:id",
+        path: base + "/publication/edit/:id",
         element: <PublicationEditPage />,
         errorElement: <SearchPage />,
     },

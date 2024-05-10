@@ -9,7 +9,7 @@ import { PublicationMediumCard } from './PublicationMediumCard'
 
 export const PublicationLargeCard = ({publication, children}) => {
     return (
-        <CardCapsule title={"Událost " + publication?.name}>
+        <CardCapsule title={"Publikace " + publication?.name}>
         <Row>
             <Col md={3}>
                 <PublicationMediumCard publication={publication} />
@@ -19,7 +19,7 @@ export const PublicationLargeCard = ({publication, children}) => {
                 {children}
             </Col>
             <Col md={3}>
-                <PublicationMediumCard publication={publication} />
+                {/* <PublicationMediumCard publication={publication} /> */}
                 {/* <UserRolesCard user={user}/> */}
             </Col>
             

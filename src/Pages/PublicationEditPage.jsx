@@ -5,6 +5,7 @@ import { useFreshItem, CreateAsyncQueryValidator, useDispatch } from "@hrbolek/u
 import { FetchPublicationByIdAsyncAction } from "../Queries/FetchPublicationByIdAsyncAction"
 import { PublicationLargeCard } from "../Components/Publication/PublicationLargeCard"
 import { PublicationEditCard } from "../Components/Publication/PublicationEditCard"
+import { PublicationAuthorEditCard } from "../Components/Publication/PublicationAuthorEditCard"
 
 const validator = CreateAsyncQueryValidator({error: "Nepovedlo se načíst publikaci", success: "Načtení publikace se povedlo"})
 export const PublicationEditPage = ()  => {
@@ -17,6 +18,7 @@ export const PublicationEditPage = ()  => {
         return (
             <PublicationLargeCard publication={publication}>
                 <PublicationEditCard publication={publication} />
+                <PublicationAuthorEditCard publication={publication} />
             </PublicationLargeCard>
         )
     } else {

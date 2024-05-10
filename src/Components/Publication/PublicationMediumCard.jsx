@@ -2,6 +2,7 @@
 import { CardCapsule } from '@hrbolek/uoisfrontend-shared/src'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { PublicationLink } from './PublicationLink'
 
 
 // export const EventMediumCard = ({event}) => {
@@ -26,10 +27,10 @@ import Col from 'react-bootstrap/Col'
 
 export const PublicationMediumCard = ({publication}) => {
     return (
-        <CardCapsule title={"Publikace " + publication?.name}>
+        <CardCapsule  title={<>Publikace <PublicationLink publication={publication } /></>}>
             
             <Row>
-                <Col>Jméno</Col>
+                <Col>Název</Col>
                 <Col>{publication?.name}</Col>
             </Row>
             <Row>
@@ -38,7 +39,7 @@ export const PublicationMediumCard = ({publication}) => {
             </Row>
             <Row>
                 <Col>Odkaz</Col>
-                <Col>{publication?.reference}</Col>
+                <Col><a href={publication?.reference}>{publication?.reference}</a></Col>
             </Row>
             <Row>
                 <Col>Typ</Col>
@@ -46,7 +47,7 @@ export const PublicationMediumCard = ({publication}) => {
             </Row>
             <Row>
                 <Col>Datum</Col>
-                <Col>{publication?.publishedDate}</Col>
+                <Col>{publication?.publishedDate && new Date(publication.publishedDate).toLocaleString()}</Col>
             </Row> 
             {/* <Membership membership={user?.membership||[]} /> */}
         </CardCapsule>
