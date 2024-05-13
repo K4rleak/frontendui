@@ -15,6 +15,7 @@ const query = `query ($id: UUID!) {
         share
         user {
           id
+          fullname
         }
       }
       publicationtype {

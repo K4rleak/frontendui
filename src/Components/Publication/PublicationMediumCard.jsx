@@ -28,6 +28,7 @@ import { PublicationLink } from './PublicationLink'
 export const PublicationMediumCard = ({publication}) => {
     return (
         <CardCapsule  title={<>Publikace <PublicationLink publication={publication } /></>}>
+        {/* // <CardCapsule title={"Publikace " + publication?.name}> */}
             
             <Row>
                 <Col>Název</Col>

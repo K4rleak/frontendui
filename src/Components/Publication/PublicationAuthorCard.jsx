@@ -14,7 +14,7 @@ const PublicationRow = ({index, publication}) => {
     )
 }
 
-export const PublicationAuthorEditCard = ({publication, filterFunc=(g)=>g?.valid===true}) => {
+export const PublicationAuthorCard = ({publication, filterFunc=(g)=>g?.valid===true}) => {
     const authors = publication?.authors || []
     const filtered = authors.filter(filterFunc)
     return (

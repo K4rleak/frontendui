@@ -1,10 +1,10 @@
 // import { useFreshItem } from "@hrbolek/uoisfrontend-shared/src"
 import { useParams } from "react-router-dom"
-import { UserLargeCard } from "../Components"
 import { useFreshItem, CreateAsyncQueryValidator, useDispatch } from "@hrbolek/uoisfrontend-shared/src"
-//import { EventLargeCard } from "../Components/Event/EventLargeCard"
 import { PublicationLargeCard} from "..//Components/Publication/PublicationLargeCard"
+
 import { FetchPublicationByIdAsyncAction } from "../Queries/FetchPublicationByIdAsyncAction"
+import { PublicationAuthorCard } from "../Components/Publication/PublicationAuthorCard"
 
 const validator = CreateAsyncQueryValidator({error: "Nepovedlo se načíst publikaci", success: "Načtení publikace se povedlo"})
 export const PublicationPage = ()  => {
@@ -15,7 +15,9 @@ export const PublicationPage = ()  => {
 
     if (publication) {
         return (
-            <PublicationLargeCard publication={publication} />
+            <PublicationLargeCard publication={publication}>
+                <PublicationAuthorCard publication={publication} />
+            </PublicationLargeCard>
         )
     } else {
         return (
