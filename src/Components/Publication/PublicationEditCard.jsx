@@ -7,10 +7,11 @@ import Col from 'react-bootstrap/Col';
 //import { EventEditType } from './EventEditType';
 import { UpdatePublicationAsyncAction } from '../../Queries/UpdatePublicationAsyncAction';
 import { PublicationEditType } from './PublicationEditType';
+import { PublicationLink } from './PublicationLink';
 
 export const PublicationEditCard = ({ publication }) => {
     return (
-        <CardCapsule title={"Publikace - atributy " + publication?.name}>
+        <CardCapsule title={<>Publikace - atributy <PublicationLink publication={publication} /></>}>
             <Row>
                 <Col>
                     <EditableAttributeText item={publication} attributeName="name" label="Název" asyncUpdater={UpdatePublicationAsyncAction} />
