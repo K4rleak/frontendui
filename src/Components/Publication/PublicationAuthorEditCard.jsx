@@ -9,7 +9,7 @@ const AuthorRow = ({index, author}) => {
         <tr>
             <td>{index}</td>
             <td>{author.order}</td>
-            <td>{author.share}</td>
+            <td>{author.share}%</td>
             <td>{author.user.fullname}</td>
             {/* <td>{JSON.stringify(author)}</td> */}
             <td><DeleteButton>D</DeleteButton></td>
@@ -29,6 +29,7 @@ export const PublicationAuthorEditCard = ({publication, filterFunc=(p)=>true}) =
                         <th>Pořadí</th>
                         <th>Podíl</th>
                         <th>Jméno</th>
+                        <th>Smazat</th>
                     </tr>
                 </thead>
                 <tbody>

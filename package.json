@@ -1,7 +1,7 @@
 {
   "name": "@k4rleak/uoisfrontend-publications",
   "private": false,
-  "version": "0.4.9",
+  "version": "0.5.0",
   "type": "module",
   "main": "dist/umd/index.js",
   "module": "dist/es/index.js",
