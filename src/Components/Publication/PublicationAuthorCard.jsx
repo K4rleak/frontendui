@@ -1,4 +1,5 @@
 import { CardCapsule, DeleteButton } from '@hrbolek/uoisfrontend-shared/src'
+import {UserLink} from "@hrbolek/uoisfrontend-users/src"
 
 //import { GroupMediumCard } from './GroupMediumCard'
 import { PublicationLink } from './PublicationLink'
@@ -10,7 +11,7 @@ const AuthorRow = ({index, author}) => {
             <td>{index}</td>
             <td>{author.order}</td>
             <td>{author.share}%</td>
-            <td>{author.user.fullname}</td>
+            <td><UserLink user={author.user}/></td>
             {/* <td>{JSON.stringify(author)}</td> */}
         </tr>
     )
