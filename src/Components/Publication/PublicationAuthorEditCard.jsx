@@ -34,10 +34,18 @@ export const PublicationAuthorEditCard = ({publication, filterFunc=(p)=>true}) =
     const authors = publication?.authors || []
     const filtered = authors.filter(filterFunc)
     const onClick=()=>{
-        const variables={id: "22222222-2222-2222-2222-222222222222", user_id: "89d1f48a-ae0f-11ed-9bd8-0242ac110002", publication_id: "cb3c3978-e716-46ac-9a3b-bb8f9d806a46", share: 15, order: 2}
-        dispatch(InsertPublicationAuthorAsyncAction(variables))
-
+        const updater = async () => {
+            const variables={id: "22222222-2222-2222-2222-222222222222", user_id: "89d1f48a-ae0f-11ed-9bd8-0242ac110002", publication_id: "cb3c3978-e716-46ac-9a3b-bb8f9d806a46", share: 15, order: 2}
+            await dispatch(InsertPublicationAuthorAsyncAction(variables))
+            await dispatch(FetchPublicationByIdAsyncAction(publication))
+        }
+        updater()
     }
+    // const onClick=()=>{
+    //     const variables={id: "22222222-2222-2222-2222-222222222222", user_id: "89d1f48a-ae0f-11ed-9bd8-0242ac110002", publication_id: "cb3c3978-e716-46ac-9a3b-bb8f9d806a46", share: 15, order: 2}
+    //     dispatch(InsertPublicationAuthorAsyncAction(variables))
+
+    // }
     return (
         <CardCapsule title={<>Autoři <PublicationLink publication={publication} /></>}>
             <table className='table table-striped table-bordered'>
