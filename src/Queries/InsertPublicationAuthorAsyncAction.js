@@ -1,5 +1,4 @@
 import { CreateAsyncActionFromMutation } from "@hrbolek/uoisfrontend-shared/src"
-id=crypto.randomUUID()
 
 const mutation = `
 mutation ($id: UUID!, $user_id: UUID!, $publication_id: UUID!, $share: Float!, $order: Int!){

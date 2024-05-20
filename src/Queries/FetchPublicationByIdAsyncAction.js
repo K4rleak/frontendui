@@ -11,6 +11,7 @@ const query = `query ($id: UUID!) {
       place
       reference
       authors {
+        id
         order
         share
         user {
