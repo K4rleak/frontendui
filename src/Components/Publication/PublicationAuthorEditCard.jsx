@@ -11,13 +11,11 @@ import { TextInput } from '@hrbolek/uoisfrontend-shared/src'
 const AddAuthorDialog = ({onCreate}) => {
     const [visible, setVisible] = useState(false)
     const [data, setData] = useState({
-        roletype_id: "233217fd-e23f-46af-a005-f1a125d39c6a",
-        startdate: new Date().toISOString().split('T')[0],
-        enddate: new Date().toISOString().split('T')[0],
+        share: 50,        
     })
     const onOk = () => {
         setVisible(false)
-        onCreate({...data})
+        onCreate({...data, share:Number(data.share)})
     }
 
     const onCancel = () => {
@@ -42,9 +40,13 @@ const AddAuthorDialog = ({onCreate}) => {
                     <SelectInput FetchAsyncAction={FetchRoleTypesAsyncAction} id="select" value={data.roletype_id} onChange={onChange("roletype_id")} />
                     <label htmlFor={"select"}>Typ role</label>
                 </div>                 */}
+                {/* <div className="form-floating">
+                    <TextInput type={"text"} id={"order"} value={data.order} onChange={onChange("order")} />
+                    <label htmlFor={"order"}>order</label>
+                </div> */}
                 <div className="form-floating">
-                    <TextInput type={"text"} id={"order"} value={0} onChange={onChange("startdate")} />
-                    <label htmlFor={"startdate"}>startdate</label>
+                    <TextInput type={"number"} id={"share"} value={data.share} onChange={onChange("share")} />
+                    <label htmlFor={"share"}>share</label>
                 </div>
                 {/* <div className="form-floating">
                     <TextInput type={"date"} id={"enddate"} value={data.enddate} onChange={onChange("enddate")} />
@@ -88,7 +90,7 @@ const AuthorRow = ({index, author,publication}) => {
     )
 }
 
-
+const validator = CreateAsyncQueryValidator({error: "Nepovedlo se přidat autora", success: "Přidání autora se povedlo"})
 export const PublicationAuthorEditCard = ({publication, filterFunc=(p)=>true}) => {
     const dispatch=useDispatch()
     const authors = publication?.authors || []
@@ -96,7 +98,7 @@ export const PublicationAuthorEditCard = ({publication, filterFunc=(p)=>true}) =
 
     const onCreate = (data) => {
         const [onResolve, onReject] = validator(dispatch)
-        const fullRecord = {...data, publication_id: publication.id, id: crypto.randomUUID()}
+        const fullRecord = {...data, id: crypto.randomUUID(),publication_id: publication.id,order:authors.length+1}
         console.log("fullRecord", fullRecord)
         dispatch(
             InsertPublicationAuthorAsyncAction(fullRecord)
