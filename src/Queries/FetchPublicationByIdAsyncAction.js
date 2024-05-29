@@ -12,6 +12,7 @@ const query = `query ($id: UUID!) {
       reference
       authors {
         id
+        lastchange
         order
         share
         user {

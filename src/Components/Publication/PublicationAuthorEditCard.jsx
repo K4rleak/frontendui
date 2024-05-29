@@ -7,11 +7,12 @@ import { FetchPublicationByIdAsyncAction } from '../../Queries/FetchPublicationB
 import { useCallback, useState } from 'react'
 import { FetchSearchUserAsyncAction } from '../../Queries/FetchSearchUserAsyncAction'
 import { TextInput } from '@hrbolek/uoisfrontend-shared/src'
+import { UpdatePublicationAuthorAsyncAction } from '../../Queries/UpdatePublicationAuthorAsyncAction'
 
 const AddAuthorDialog = ({onCreate}) => {
     const [visible, setVisible] = useState(false)
     const [data, setData] = useState({
-        share: 50,        
+        share: 100,        
     })
     const onOk = () => {
         setVisible(false)
@@ -36,22 +37,10 @@ const AddAuthorDialog = ({onCreate}) => {
     if (visible) {
         return (
             <Dialog title="Výběr autora" onOk={onOk} onCancel={onCancel}>
-                {/* <div className="form-floating">
-                    <SelectInput FetchAsyncAction={FetchRoleTypesAsyncAction} id="select" value={data.roletype_id} onChange={onChange("roletype_id")} />
-                    <label htmlFor={"select"}>Typ role</label>
-                </div>                 */}
-                {/* <div className="form-floating">
-                    <TextInput type={"text"} id={"order"} value={data.order} onChange={onChange("order")} />
-                    <label htmlFor={"order"}>order</label>
-                </div> */}
                 <div className="form-floating">
                     <TextInput type={"number"} id={"share"} value={data.share} onChange={onChange("share")} />
                     <label htmlFor={"share"}>share</label>
                 </div>
-                {/* <div className="form-floating">
-                    <TextInput type={"date"} id={"enddate"} value={data.enddate} onChange={onChange("enddate")} />
-                    <label htmlFor={"enddate"}>enddate</label>
-                </div> */}
                 <SearchInput title="Výběr uživatele" onSelect={onChange("user_id")} FetchByPatternAsyncAction={FetchSearchUserAsyncAction} />
             </Dialog>
         )
@@ -61,12 +50,6 @@ const AddAuthorDialog = ({onCreate}) => {
         )
     }
 }
-
-
-
-
-
-
 
 const AuthorRow = ({index, author,publication}) => {
     const dispatch=useDispatch()
@@ -84,7 +67,6 @@ const AuthorRow = ({index, author,publication}) => {
             <td>{author.order}</td>
             <td>{author.share}%</td>
             <td>{author.user.fullname}</td>
-            {/* <td>{JSON.stringify(author)}</td> */}
             <td><DeleteButton onClick={onClick}>D</DeleteButton></td>
         </tr>
     )
@@ -97,6 +79,11 @@ export const PublicationAuthorEditCard = ({publication, filterFunc=(p)=>true}) =
     const filtered = authors.filter(filterFunc)
 
     const onCreate = (data) => {
+        // const sharesum = filtered.reduce((sum, author) => sum + (author?.share||0), 0)+data.share;
+        // console.log(sharesum,data.share)
+        // filtered.forEach(author => {
+        //     dispatch(UpdatePublicationAuthorAsyncAction({...author,share:Math.round((author.share/sharesum)*100),userid:author.user.id}))
+        // })
         const [onResolve, onReject] = validator(dispatch)
         const fullRecord = {...data, id: crypto.randomUUID(),publication_id: publication.id,order:authors.length+1}
         console.log("fullRecord", fullRecord)
@@ -104,19 +91,15 @@ export const PublicationAuthorEditCard = ({publication, filterFunc=(p)=>true}) =
             InsertPublicationAuthorAsyncAction(fullRecord)
         ).then(onResolve, onReject)
         .then(() => {
-            // dispatch(GroupAsyncActions.read({id: group.id}))
             dispatch(FetchPublicationByIdAsyncAction(publication))
         })
     }
 
-    const onClick=()=>{
-        const updater = async () => {
-            const variables={id: crypto.randomUUID(), user_id: "89d1f48a-ae0f-11ed-9bd8-0242ac110002", publication_id: "cb3c3978-e716-46ac-9a3b-bb8f9d806a46", share: 15, order: 2}
-            await dispatch(InsertPublicationAuthorAsyncAction(variables))
-            await dispatch(FetchPublicationByIdAsyncAction(publication))
-        }
-        updater()
+    const onRecount=()=>{
+        const sharesum = filtered.reduce((sum, author) => sum + (author?.share||0), 0);
+        console.log(sharesum)
     }
+
     return (
         <CardCapsule title={<>Autoři <PublicationLink publication={publication} /></>}>
             <table className='table table-striped table-bordered'>
@@ -136,6 +119,9 @@ export const PublicationAuthorEditCard = ({publication, filterFunc=(p)=>true}) =
                     <tr>
                         {/* <td colSpan={5}><button className='btn btn-success form-control' onClick={onClick}>+</button></td> */}
                         <td colSpan={5}><AddAuthorDialog publication={publication} onCreate={onCreate}/></td>
+                    </tr>
+                    <tr>
+                        <td colSpan={5}><button className='btn btn-outline-primary form-control' onClick={onRecount}>Rozpočet procent</button></td>
                     </tr>
                 </tbody>
             </table>
