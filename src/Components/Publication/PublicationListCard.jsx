@@ -1,6 +1,7 @@
-import { CardCapsule, DeleteButton } from '@hrbolek/uoisfrontend-shared/src'
+import { CardCapsule, DeleteButton,useFreshItem,CreateAsyncQueryValidator, useDispatch } from '@hrbolek/uoisfrontend-shared/src'
 import {UserLink} from "@hrbolek/uoisfrontend-users/src"
 import { PublicationLink } from './PublicationLink'
+import { useParams } from "react-router-dom"
 import { FetchUserPublicationsAsyncAction } from '../../Queries/FetchUserPublicationsAsyncAction'
 
 
@@ -8,38 +9,40 @@ const PublicationRow = ({index, publication}) => {
     return (
         <tr>
             <td>{index}</td>
-            <td>{publication.id}</td>
-            {/* <td>{author.order}</td>
-            <td>{author.share}%</td>
-            <td><UserLink user={author.user}/></td> */}
-            {/* <td>{JSON.stringify(author)}</td> */}
+            <td><PublicationLink publication={publication}/></td>
+            <td>{publication.place}</td>
+            <td>{publication.reference}</td>
+            <td>{publication?.publicationtype.name}</td>
+            <td>{publication?.publishedDate}</td>
         </tr>
     )
 }
-
 export const UserPublicationListCard = ()=>{
-    const [authorPublications, userPromise] = useFreshItem({id}, FetchUserPublicationsAsyncAction)
-    console.log(authorPublications)
+    const [user, userPromise] = useFreshItem({id:"89d1f638-ae0f-11ed-9bd8-0242ac110002"}, FetchUserPublicationsAsyncAction)
+    const auhtorpublications = user?.authorPublications||[]
+    const publications = auhtorpublications.map(item => item.publication)
+    if(publications){console.log(publications)}
     return<PublicationListCard publications={publications}/>
 }
 
 export const PublicationListCard = ({publications}) => {
-    // const publications = user?.authorPublications || []
-    // const filtered = authors.filter(filterFunc)
+
     return (
-        <CardCapsule title={<>Autoři <PublicationLink publication={publication} /></>}>
+        <CardCapsule title={"Publikace "}>
             <table className='table table-striped table-bordered'>
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Pořadí</th>
-                        <th>Podíl</th>
-                        <th>Jméno</th>
+                        <th>Název</th>
+                        <th>Místo</th>
+                        <th>Odkaz</th>
+                        <th>Typ</th>
+                        <th>Datum</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {filtered.map(
-                        (a, i) => <AuthorRow index={i+1} key={a.id} author={a} />
+                    {publications.map(
+                        (p, i) => <PublicationRow index={i+1} key={p.id} publication={p} />
                     )}
                     {/* <tr>
                         <td colSpan={3}><button className='btn btn-success form-control'>+</button></td>

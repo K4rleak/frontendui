@@ -5,6 +5,7 @@ import { PublicationLargeCard} from "..//Components/Publication/PublicationLarge
 
 import { FetchPublicationByIdAsyncAction } from "../Queries/FetchPublicationByIdAsyncAction"
 import { PublicationAuthorCard } from "../Components/Publication/PublicationAuthorCard"
+import {  UserPublicationListCard } from "../Components/Publication/PublicationListCard"
 
 const validator = CreateAsyncQueryValidator({error: "Nepovedlo se načíst publikaci", success: "Načtení publikace se povedlo"})
 export const PublicationPage = ()  => {
@@ -17,6 +18,7 @@ export const PublicationPage = ()  => {
         return (
             <PublicationLargeCard publication={publication}>
                 <PublicationAuthorCard publication={publication} />
+                <UserPublicationListCard /*publication={publication}*/ />
             </PublicationLargeCard>
         )
     } else {
