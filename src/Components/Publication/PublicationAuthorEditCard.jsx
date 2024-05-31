@@ -96,8 +96,33 @@ export const PublicationAuthorEditCard = ({publication, filterFunc=(p)=>true}) =
     }
 
     const onRecount=()=>{
-        const sharesum = filtered.reduce((sum, author) => sum + (author?.share||0), 0);
+        const sharesum = filtered.reduce((sum, author) => sum + (author?.share||0), 0)
         console.log(sharesum)
+        if (sharesum>0){
+            const promises = filtered.map(author => {
+                dispatch(UpdatePublicationAuthorAsyncAction({...author,share:Math.round((author.share/sharesum)*100),userid:author.user.id}))
+            })
+            Promise.all(promises).then(() => {
+                dispatch(FetchPublicationByIdAsyncAction(publication))
+            })
+        }
+            else{
+                console.log("aa")
+            }
+
+        // const addto100 = new Promise((resolve,reject)=>{
+        //     if (condition) {
+        //         //  block of code to be executed if the condition is true
+        //       } else {
+        //         //  block of code to be executed if the condition is false
+        //       }
+        // })
+        // promises.push(addto100)
+
+
+
+
+
     }
 
     return (
@@ -121,7 +146,7 @@ export const PublicationAuthorEditCard = ({publication, filterFunc=(p)=>true}) =
                         <td colSpan={5}><AddAuthorDialog publication={publication} onCreate={onCreate}/></td>
                     </tr>
                     <tr>
-                        <td colSpan={5}><button className='btn btn-outline-primary form-control' onClick={onRecount}>Rozpočet procent</button></td>
+                        <td colSpan={5}><button className='btn btn-primary form-control' onClick={onRecount}>Rozpočet procent</button></td>
                     </tr>
                 </tbody>
             </table>
