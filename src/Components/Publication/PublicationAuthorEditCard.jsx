@@ -77,7 +77,7 @@ export const PublicationAuthorEditCard = ({publication, filterFunc=(p)=>true}) =
     const dispatch=useDispatch()
     const authors = publication?.authors || []
     const filtered = authors.filter(filterFunc)
-
+    const sortedFiltered = filtered.sort((a, b) => a.order - b.order)
     const onCreate = (data) => {
         // const sharesum = filtered.reduce((sum, author) => sum + (author?.share||0), 0)+data.share;
         // console.log(sharesum,data.share)
@@ -138,7 +138,7 @@ export const PublicationAuthorEditCard = ({publication, filterFunc=(p)=>true}) =
                     </tr>
                 </thead>
                 <tbody>
-                    {filtered.map(
+                    {sortedFiltered.map(
                         (a, i) => <AuthorRow index={i+1} key={a.id} author={a} publication={publication} />
                     )}
                     <tr>

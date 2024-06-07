@@ -11,7 +11,7 @@ const PublicationRow = ({index, publication}) => {
             <td>{index}</td>
             <td><PublicationLink publication={publication}/></td>
             <td>{publication.place}</td>
-            <td>{publication.reference}</td>
+            <td><a href={publication?.reference}>{publication?.reference}</a></td>
             <td>{publication?.publicationtype.name}</td>
             <td>{publication?.publishedDate}</td>
         </tr>
