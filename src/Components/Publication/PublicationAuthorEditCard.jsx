@@ -8,6 +8,7 @@ import { useCallback, useState } from 'react'
 import { FetchSearchUserAsyncAction } from '../../Queries/FetchSearchUserAsyncAction'
 import { TextInput } from '@hrbolek/uoisfrontend-shared/src'
 import { UpdatePublicationAuthorAsyncAction } from '../../Queries/UpdatePublicationAuthorAsyncAction'
+import {UserLink} from "@hrbolek/uoisfrontend-users/src"
 
 const AddAuthorDialog = ({onCreate}) => {
     const [visible, setVisible] = useState(false)
@@ -66,7 +67,8 @@ const AuthorRow = ({index, author,publication}) => {
             <td>{index}</td>
             <td>{author.order}</td>
             <td>{author.share}%</td>
-            <td>{author.user.fullname}</td>
+            {/* <td>{author.user.fullname}</td> */}
+            <td><UserLink user={author.user}/></td>
             <td><DeleteButton onClick={onClick}>D</DeleteButton></td>
         </tr>
     )

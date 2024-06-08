@@ -9,6 +9,7 @@ import { EventEditPage } from "./Pages/EventEditPage";
 import { PublicationPage } from "./Pages/PublicationPage";
 import { PublicationEditPage } from "./Pages/PublicationEditPage";
 import { base } from "./config";
+import { AuthorEditPage } from "./Pages/AuthorEditPage";
 // import { UserPage, GroupPage } from "./Pages";
 
 export const Routes = [
@@ -36,6 +37,11 @@ export const Routes = [
     {
         path: base + "/publication/edit/:id",
         element: <PublicationEditPage />,
+        errorElement: <SearchPage />,
+    },
+    {
+        path: base + "/authors/edit/:publication_id",
+        element: <AuthorEditPage />,
         errorElement: <SearchPage />,
     },
     {
