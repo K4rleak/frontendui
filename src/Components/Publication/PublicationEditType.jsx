@@ -10,12 +10,12 @@ export const PublicationEditType = ({publication}) => {
     const [publicationtypesdata, setThem] = useState([])
     publicationtypesPromise.then(json =>  
     {
-        console.log(json)
+        //console.log(json)
         const r = json?.data?.result
         if (r)
         {
             setThem(r)
-            console.log(r)
+            //console.log(r)
         }
     })
     const publicationEx = { ...publication, publicationtype_id: publication?.publicationtype.id};

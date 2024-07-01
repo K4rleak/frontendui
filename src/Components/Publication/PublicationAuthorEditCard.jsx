@@ -101,31 +101,33 @@ export const PublicationAuthorEditCard = ({publication, filterFunc=(p)=>true}) =
         const sharesum = filtered.reduce((sum, author) => sum + (author?.share||0), 0)
         console.log(sharesum)
         if (sharesum>0){
-            const promises = filtered.map(author => {
-                dispatch(UpdatePublicationAuthorAsyncAction({...author,share:Math.round((author.share/sharesum)*100),userid:author.user.id}))
-            })
+            // const promises = filtered.map(author => {
+            //     dispatch(UpdatePublicationAuthorAsyncAction({...author,share:Math.round((author.share/sharesum)*100),userid:author.user.id}))
+            // })
+            const newShares = filtered.map(author => ({...author,share: Math.round((author.share / sharesum) * 100)}));
+            const newsum = newShares.reduce((sum, author) => sum + (author?.share||0), 0)
+            if (newsum != 100){
+                const lastshare=newShares[newShares.length - 1].share
+                newShares[newShares.length - 1].share = 100-(newsum-lastshare)
+                console.log("Dopocet probehl stara hodnota byla:"+ newsum)
+            }
+            
+            const promises = newShares.map(author => {
+                dispatch(UpdatePublicationAuthorAsyncAction({...author,userid:author.user.id}));
+            });
+
+
             Promise.all(promises).then(() => {
                 dispatch(FetchPublicationByIdAsyncAction(publication))
             })
         }
             else{
-                console.log("aa")
+                console.log("Nejsou zadana zadna procenta")
             }
-
-        // const addto100 = new Promise((resolve,reject)=>{
-        //     if (condition) {
-        //         //  block of code to be executed if the condition is true
-        //       } else {
-        //         //  block of code to be executed if the condition is false
-        //       }
-        // })
-        // promises.push(addto100)
-
-
-
-
-
     }
+
+// sorry za tohle vsechno ^^
+
 
     return (
         <CardCapsule title={<>Autoři <PublicationLink publication={publication} /></>}>
