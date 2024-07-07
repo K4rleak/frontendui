@@ -20,6 +20,7 @@ const AuthorRow = ({index, author}) => {
 export const PublicationAuthorCard = ({publication, filterFunc=(p)=>true}) => {
     const authors = publication?.authors || []
     const filtered = authors.filter(filterFunc)
+    const sortedFiltered = filtered.sort((a, b) => a.order - b.order)
     return (
         <CardCapsule title={<>Autoři <PublicationLink publication={publication} /></>}>
             <table className='table table-striped table-bordered'>
@@ -32,7 +33,7 @@ export const PublicationAuthorCard = ({publication, filterFunc=(p)=>true}) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {filtered.map(
+                    {sortedFiltered.map(
                         (a, i) => <AuthorRow index={i+1} key={a.id} author={a} />
                     )}
                     {/* <tr>
